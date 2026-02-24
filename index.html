@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 31 Monday & Tuesday Practice Quiz</title>
+    <style>
+        /* --- CSS Variables & Themes --- */
+        :root {
+            /* Base Transition */
+            --transition-speed: 0.3s;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* 1. Modern Dark (Default) */
+        [data-theme="dark"] {
+            --bg-body: #1e293b;
+            --bg-card: #334155;
+            --bg-header: #0f172a;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-accent: #38bdf8;
+            --border-color: #475569;
+            --highlight-bg: #475569;
+            --button-bg: #38bdf8;
+            --button-text: #0f172a;
+            --button-hover: #0ea5e9;
+            --feedback-success-bg: #064e3b;
+            --feedback-success-border: #059669;
+            --feedback-success-text: #a7f3d0;
+            --feedback-error-bg: #7f1d1d;
+            --feedback-error-border: #dc2626;
+            --feedback-error-text: #fecaca;
+        }
+
+        /* 2. Modern Light */
+        [data-theme="light"] {
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --text-accent: #2563eb;
+            --border-color: #e5e7eb;
+            --highlight-bg: #f3f4f6;
+            --button-bg: #2563eb;
+            --button-text: #ffffff;
+            --button-hover: #1d4ed8;
+            --feedback-success-bg: #ecfdf5;
+            --feedback-success-border: #34d399;
+            --feedback-success-text: #065f46;
+            --feedback-error-bg: #fef2f2;
+            --feedback-error-border: #f87171;
+            --feedback-error-text: #991b1b;
+        }
+
+        /* 3. Midnight (Pure Black) */
+        [data-theme="midnight"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --text-accent: #90caf9;
+            --border-color: #333333;
+            --highlight-bg: #1a1a1a;
+            --button-bg: #90caf9;
+            --button-text: #000000;
+            --button-hover: #42a5f5;
+            --feedback-success-bg: #051b11;
+            --feedback-success-border: #0f5132;
+            --feedback-success-text: #75b798;
+            --feedback-error-bg: #2c0b0e;
+            --feedback-error-border: #842029;
+            --feedback-error-text: #ea868f;
+        }
+
+        /* 4. Legacy Dark (Original) */
+        [data-theme="legacy-dark"] {
+            --bg-body: #2d343e;
+            --bg-card: #3c424f;
+            --bg-header: #3c424f;
+            --text-main: #e8e6e3;
+            --text-muted: #b0c4de;
+            --text-accent: #8ab4f8;
+            --border-color: #555;
+            --highlight-bg: #454c5a;
+            --button-bg: #8ab4f8;
+            --button-text: #202124;
+            --button-hover: #a3c5f9;
+            --feedback-success-bg: #344e41;
+            --feedback-success-border: #52b788;
+            --feedback-success-text: #c7f9cc;
+            --feedback-error-bg: #5e2129;
+            --feedback-error-border: #a4133c;
+            --feedback-error-text: #f8d7da;
+        }
+
+        /* 5. Sepia (Reading Mode) */
+        [data-theme="sepia"] {
+            --bg-body: #f4ecd8;
+            --bg-card: #fdf6e3;
+            --bg-header: #e4d5b7;
+            --text-main: #433422;
+            --text-muted: #7c6f5a;
+            --text-accent: #a05a2c;
+            --border-color: #d3c4a5;
+            --highlight-bg: #ebe1c9;
+            --button-bg: #a05a2c;
+            --button-text: #fdf6e3;
+            --button-hover: #864822;
+            --feedback-success-bg: #e6f4ea;
+            --feedback-success-border: #8ab893;
+            --feedback-success-text: #2e4c35;
+            --feedback-error-bg: #f9e3e3;
+            --feedback-error-border: #d48f8f;
+            --feedback-error-text: #5c2b2b;
+        }
+
+        /* 6. High Contrast */
+        [data-theme="contrast"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #ffffff;
+            --text-muted: #dddddd;
+            --text-accent: #ffff00;
+            --border-color: #ffffff;
+            --highlight-bg: #333333;
+            --button-bg: #ffff00;
+            --button-text: #000000;
+            --button-hover: #e6e600;
+            --feedback-success-bg: #000000;
+            --feedback-success-border: #00ff00;
+            --feedback-success-text: #00ff00;
+            --feedback-error-bg: #000000;
+            --feedback-error-border: #ff0000;
+            --feedback-error-text: #ff0000;
+        }
+
+        /* --- Global Reset & Layout --- */
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-main);
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            line-height: 1.6;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Default to Sticky */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Class to remove sticky behavior */
+        header.unpinned {
+            position: relative;
+            box-shadow: none;
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            margin: 0;
+            color: var(--text-accent);
+        }
+
+        .controls-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pin-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .pin-btn:hover {
+            background-color: var(--highlight-bg);
+        }
+
+        .pin-btn.pin-active {
+            color: var(--text-accent);
+            border-color: var(--text-accent);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        select#theme-select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* --- Main Content --- */
+        .container {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 0 1rem 4rem 1rem;
+        }
+
+        .section-header {
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--text-accent);
+            color: var(--text-accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* --- Question Card --- */
+        .question-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .lo-box {
+            background-color: var(--highlight-bg);
+            border-left: 4px solid var(--text-accent);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Options --- */
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-label:hover {
+            background-color: var(--highlight-bg);
+            border-color: var(--text-muted);
+        }
+
+        .option-label input {
+            margin-top: 0.3rem;
+            margin-right: 1rem;
+            accent-color: var(--text-accent);
+            transform: scale(1.2);
+        }
+
+        /* --- Buttons --- */
+        .btn-check {
+            margin-top: 1.5rem;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            font-size: 1rem;
+        }
+
+        .btn-check:hover {
+            opacity: 0.9;
+        }
+
+        /* --- Feedback Area --- */
+        .feedback {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: none; /* Hidden by default */
+            border: 1px solid transparent;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background-color: var(--feedback-success-bg);
+            border-color: var(--feedback-success-border);
+            color: var(--feedback-success-text);
+        }
+
+        .feedback.incorrect {
+            background-color: var(--feedback-error-bg);
+            border-color: var(--feedback-error-border);
+            color: var(--feedback-error-text);
+        }
+
+        .feedback-header {
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .rationale {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .source {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-style: italic;
+            border-top: 1px dashed currentColor;
+            padding-top: 0.5rem;
+        }
+
+        /* --- Mobile Tweaks --- */
+        @media (max-width: 600px) {
+            header { padding: 1rem; flex-direction: column; gap: 10px; align-items: flex-start; }
+            .controls-wrapper { width: 100%; justify-content: space-between; }
+            .question-card { padding: 1.5rem; }
+            header h1 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <h1>Week 31 Monday & Tuesday Practice Quiz</h1>
+        <div class="controls-wrapper">
+            <!-- Pin Button -->
+            <button class="pin-btn pin-active" id="pin-btn" onclick="toggleHeader()" title="Pin/Unpin Header">
+                📍
+            </button>
+            
+            <div class="theme-control">
+                <label for="theme-select">Theme:</label>
+                <select id="theme-select" onchange="changeTheme(this.value)">
+                    <option value="dark">Modern Dark</option>
+                    <option value="midnight">Midnight</option>
+                    <option value="light">Modern Light</option>
+                    <option value="legacy-dark">Legacy Dark</option>
+                    <option value="sepia">Sepia</option>
+                    <option value="contrast">High Contrast</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" id="quiz-root">
+        <!-- Content injected via JS -->
+    </div>
+
+    <script>
+        // --- Data ---
+        const quizData = [
+            // --- Section 1: Upper Respiratory Infections ---
+            {
+                section: "Upper Respiratory Infections",
+                maskedLO: "LO1: Compare and contrast the most common etiologies... of acute and chronic upper respiratory tract diseases.",
+                fullLO: "LO1: Compare and contrast the most common etiologies, pathogenesis, clinical manifestations, treatment, and prevention of acute and chronic upper respiratory tract diseases",
+                question: "A 35-year-old woman presents with nasal congestion and facial pain. She reports having a \"common cold\" ten days ago that seemed to resolve, but her symptoms have returned and worsened over the last 24 hours (\"double sickening\"), accompanied by a fever of 39°C. Which of the following is the most likely diagnosis?",
+                options: {
+                    A: "Acute Bacterial Rhinosinusitis",
+                    B: "Acute Viral Rhinosinusitis",
+                    C: "Allergic Rhinitis",
+                    D: "Chronic Sinusitis",
+                    E: "Nasal Polyposis"
+                },
+                correctAnswer: "A",
+                rationale: "The patient presents with the \"double sickening\" pattern (worsening symptoms after a viral URI), fever >39°C, and duration &ge; 10 days, which are criteria for Acute Bacterial Rhinosinusitis (ABRS). Viral rhinosinusitis typically resolves sooner and does not follow the \"double sickening\" pattern.",
+                source: "Upper Respiratory Infections PDF, Slide 4: \"Symptoms compatible with acute rhinosinusitis for &ge;10 days... Worsening symptoms after a viral URI (‘double sickening’)\""
+            },
+            {
+                section: "Upper Respiratory Infections",
+                maskedLO: "LO1: Compare and contrast the most common etiologies... of acute and chronic upper respiratory tract diseases.",
+                fullLO: "LO1: Compare and contrast the most common etiologies, pathogenesis, clinical manifestations, treatment, and prevention of acute and chronic upper respiratory tract diseases",
+                question: "A 16-year-old competitive swimmer presents with right ear pain and itching. Physical examination reveals erythema of the ear canal and pain upon manipulation of the tragus. The tympanic membrane is pearly gray and mobile. Which of the following is the most likely etiologic agent?",
+                options: {
+                    A: "Haemophilus influenzae",
+                    B: "Moraxella catarrhalis",
+                    C: "Pseudomonas aeruginosa",
+                    D: "Streptococcus pneumoniae",
+                    E: "Streptococcus pyogenes"
+                },
+                correctAnswer: "C",
+                rationale: "This clinical picture describes Acute Otitis Externa (AOE) or \"Swimmer's Ear\" (pain, pruritus, history of swimming). The most common etiologies for AOE are Pseudomonas aeruginosa and Staphylococcus aureus. S. pneumoniae, H. influenzae, and M. catarrhalis are associated with Otitis Media.",
+                source: "Upper Respiratory Infections PDF, Slide 20: \"Acute Otitis Externa (AOE) 'Swimmer’s Ear'... Etiology: Pseudomonas aeruginosa, Staphylococcus aureus\""
+            },
+            {
+                section: "Upper Respiratory Infections",
+                maskedLO: "LO1: Compare and contrast the most common etiologies... of acute and chronic upper respiratory tract diseases.",
+                fullLO: "LO1: Compare and contrast the most common etiologies, pathogenesis, clinical manifestations, treatment, and prevention of acute and chronic upper respiratory tract diseases",
+                question: "A 7-year-old boy presents with a sudden onset of sore throat and fever. Physical examination reveals an inflamed pharynx with exudates, palatal petechiae, and a \"strawberry tongue.\" There is a rough, sandpaper-like rash on his trunk. Which of the following is the most likely diagnosis?",
+                options: {
+                    A: "Diphtheria",
+                    B: "Herpangina",
+                    C: "Infectious Mononucleosis",
+                    D: "Scarlet Fever",
+                    E: "Viral Pharyngitis"
+                },
+                correctAnswer: "D",
+                rationale: "Scarlet Fever is a toxigenic disease caused by Group A Streptococcus (Spe toxin). It presents with pharyngitis, a \"strawberry tongue,\" and a characteristic rash.",
+                source: "Upper Respiratory Infections PDF, Slides 39 & 40: \"Toxigenic Diseases: HYI... Scarlet Fever: caused by Spe... Perioral Pallor and Strawberry Tongue in a child with scarlet fever\""
+            },
+            {
+                section: "Upper Respiratory Infections",
+                maskedLO: "LO1: Compare and contrast the most common etiologies... of acute and chronic upper respiratory tract diseases.",
+                fullLO: "LO1: Compare and contrast the most common etiologies, pathogenesis, clinical manifestations, treatment, and prevention of acute and chronic upper respiratory tract diseases",
+                question: "A 3-year-old unimmunized child is brought to the emergency department with high fever, drooling, and respiratory distress. The child is sitting in a tripod position. A lateral neck X-ray reveals a \"thumb sign.\" Which of the following is the most likely pathogen?",
+                options: {
+                    A: "Bordetella pertussis",
+                    B: "Corynebacterium diphtheriae",
+                    C: "Haemophilus influenzae type b",
+                    D: "Parainfluenza virus",
+                    E: "Streptococcus pyogenes"
+                },
+                correctAnswer: "C",
+                rationale: "This is a classic presentation of epiglottitis (drooling, distress, tripod position, \"thumb sign\"). Despite vaccination, Haemophilus influenzae type b remains an important cause, especially in unimmunized populations.",
+                source: "Upper Respiratory Infections PDF, Slide 44: \"In spite of vaccination, H. influenzae type b remains an important cause of epiglottitis\""
+            },
+            {
+                section: "Upper Respiratory Infections",
+                maskedLO: "LO1: Compare and contrast the most common etiologies... of acute and chronic upper respiratory tract diseases.",
+                fullLO: "LO1: Compare and contrast the most common etiologies, pathogenesis, clinical manifestations, treatment, and prevention of acute and chronic upper respiratory tract diseases",
+                question: "A 10-year-old immigrant child with no vaccination record presents with a sore throat and low-grade fever. Examination reveals a thick, gray pseudomembrane covering the tonsils and pharynx that bleeds when scraped. The neck appears swollen (\"bull's neck\"). The pathogenesis of this condition involves:",
+                options: {
+                    A: "Invasion of the bloodstream by bacteria",
+                    B: "Production of a toxin that inhibits protein synthesis",
+                    C: "Production of a toxin that increases cAMP",
+                    D: "Release of endotoxin causing shock",
+                    E: "Viral destruction of epithelial cells"
+                },
+                correctAnswer: "B",
+                rationale: "Diphtheria is entirely toxin-mediated (no invasion). The diphtheria toxin inactivates EF-2, halting protein synthesis and resulting in cell death.",
+                source: "Upper Respiratory Infections PDF, Slides 50 & 52: \"No invasion: entirely toxin-mediated... Diphtheria Toxin... Inactivates EF-2... Stops protein synthesis resulting in cell death\""
+            },
+            {
+                section: "Upper Respiratory Infections",
+                maskedLO: "LO1: Compare and contrast the most common etiologies... of acute and chronic upper respiratory tract diseases.",
+                fullLO: "LO1: Compare and contrast the most common etiologies, pathogenesis, clinical manifestations, treatment, and prevention of acute and chronic upper respiratory tract diseases",
+                question: "An infant presents with a cough that has persisted for three weeks. The parents report the cough comes in spasms that cause the infant's face to turn blue, followed by vomiting. Laboratory results show a WBC count of 30,000/µL with 60% lymphocytes; a diagnosis of pertussis is made. What stage of the disease is this patient currently in?",
+                options: {
+                    A: "Catarrhal Stage",
+                    B: "Convalescent Stage",
+                    C: "Incubation Stage",
+                    D: "Paroxysmal Cough Stage",
+                    E: "Viremic Stage"
+                },
+                correctAnswer: "D",
+                rationale: "The Paroxysmal stage (2-4 weeks) is characterized by progressive cough in spasms, cyanosis, vomiting, and inspiratory whoop. Lymphocytosis is a hallmark lab finding.",
+                source: "Upper Respiratory Infections PDF, Slides 58 & 60: \"Paroxysmal Cough Stage (2-4 weeks)... Progressive cough in spasms, causing cyanosis, vomiting... Very high WBC with Lymphocytosis (50%) - HYI\""
+            },
+            {
+                section: "Upper Respiratory Infections",
+                maskedLO: "LO2: Recognize diagnostic features of the most common pathogens involved.",
+                fullLO: "LO2: Recognize diagnostic features of the most common pathogens involved",
+                question: "A sputum sample from a patient with pneumonia reveals Gram-positive, lancet-shaped diplococci. Colonies on blood agar are mucoid with a \"crater-like\" appearance. The organism is sensitive to Optochin. Which of the following is the most likely pathogen?",
+                options: {
+                    A: "Haemophilus influenzae",
+                    B: "Moraxella catarrhalis",
+                    C: "Staphylococcus aureus",
+                    D: "Streptococcus pneumoniae",
+                    E: "Streptococcus pyogenes"
+                },
+                correctAnswer: "D",
+                rationale: "S. pneumoniae is identified by Gram-positive lancet-shaped diplococci, alpha-hemolytic \"crater\" colonies, and Optochin sensitivity.",
+                source: "Upper Respiratory Infections PDF, Slide 11: \"Gram (+), lancet-shaped diplococci... Mucoid colonies with 'crater' like appearance... Sensitive to Optochin\""
+            },
+            {
+                section: "Upper Respiratory Infections",
+                maskedLO: "LO2: Recognize diagnostic features of the most common pathogens involved.",
+                fullLO: "LO2: Recognize diagnostic features of the most common pathogens involved",
+                question: "A laboratory technician is culturing a specimen from a child with suspected epiglottitis. The organism grows on Chocolate agar but fails to grow on Blood agar unless cross-streaked with Staphylococcus. The organism requires both X (hemin) and V (NAD) factors. What is the pathogen?",
+                options: {
+                    A: "Bordetella pertussis",
+                    B: "Corynebacterium diphtheriae",
+                    C: "Haemophilus influenzae",
+                    D: "Pseudomonas aeruginosa",
+                    E: "Streptococcus pneumoniae"
+                },
+                correctAnswer: "C",
+                rationale: "Haemophilus influenzae is a Gram-negative coccobacillus that requires X (hemin) and V (NAD) factors for growth, which are provided in Chocolate agar.",
+                source: "Upper Respiratory Infections PDF, Slide 13: \"Haemophilus influenzae: HYI... X (hemin) and V (NAD) factor requirement\""
+            },
+            {
+                section: "Upper Respiratory Infections",
+                maskedLO: "LO3: Describe the MOAs of diphtheria and pertussis toxins...",
+                fullLO: "LO3: Describe the MOAs of diphtheria and pertussis toxins and their roles in the pathogenesis of diphtheria and whooping cough",
+                question: "The major virulence factor of Corynebacterium diphtheriae is an A-B exotoxin. Which of the following best describes the molecular mechanism of action of this toxin?",
+                options: {
+                    A: "Activation of adenylate cyclase causing increased cAMP",
+                    B: "ADP-ribosylation of Elongation Factor-2 (EF-2)",
+                    C: "Cleavage of SNARE proteins inhibiting neurotransmitter release",
+                    D: "Disruption of the cell membrane via pore formation",
+                    E: "Superantigen stimulation of T-cells"
+                },
+                correctAnswer: "B",
+                rationale: "Diphtheria toxin is an ADP-ribosylating enzyme that inactivates EF-2, halting protein synthesis and causing cell death.",
+                source: "Upper Respiratory Infections PDF, Slide 52: \"A-B toxin = ADP-ribosylating enzyme... Inactivates EF-2... Stops protein synthesis resulting in cell death\""
+            },
+            {
+                section: "Upper Respiratory Infections",
+                maskedLO: "LO3: Describe the MOAs of diphtheria and pertussis toxins...",
+                fullLO: "LO3: Describe the MOAs of diphtheria and pertussis toxins and their roles in the pathogenesis of diphtheria and whooping cough",
+                question: "In the pathogenesis of Bordetella pertussis, the pertussis toxin contributes to mucus secretion and lymphocytosis by modifying a G-protein. This modification results in:",
+                options: {
+                    A: "Activation of Guanylate Cyclase",
+                    B: "Blockage of Calcium channels",
+                    C: "Inactivation of inhibitory G protein (G<sub>&alpha;i</sub>), increasing Adenylate Cyclase activity",
+                    D: "Inhibition of Adenylate Cyclase, decreasing cAMP",
+                    E: "Stimulation of phospholipase C"
+                },
+                correctAnswer: "C",
+                rationale: "Pertussis toxin ADP-ribosylates the inhibitory G protein (G<sub>&alpha;i</sub>), inactivating it. This leads to uncontrolled adenylate cyclase activity and increased cAMP.",
+                source: "Upper Respiratory Infections PDF, Slide 57: \"Pertussis toxin inactivates G<sub>&alpha;i</sub>, the inhibitory protein that controls adenylate cyclase activity -> Adenylate cyclase [increases] -> cAMP [increases]\""
+            },
+
+            // --- Section 2: Pulmonary Circulation: Ventilation and Perfusion ---
+            {
+                section: "Pulmonary Circulation: Ventilation and Perfusion",
+                maskedLO: "LO1: Describe pressures within the pulmonary blood vessels...",
+                fullLO: "LO1: Describe pressures within the pulmonary blood vessels and explain how they differ from systemic pressures",
+                question: "A medical student is comparing the hemodynamics of the systemic and pulmonary circulations. Which of the following values best represents the typical mean pulmonary artery pressure in a healthy adult?",
+                options: {
+                    A: "5 mmHg",
+                    B: "15 mmHg",
+                    C: "30 mmHg",
+                    D: "80 mmHg",
+                    E: "100 mmHg"
+                },
+                correctAnswer: "B",
+                rationale: "The mean pulmonary artery pressure is approximately 15 mmHg, significantly lower than the mean systemic arterial pressure of 100 mmHg.",
+                source: "Pulmonary Circulation PDF, Slide 5 & 8: \"Mean = 15 [Pulmonary Artery]\" vs \"Mean = 100 [Systemic Artery]\""
+            },
+            {
+                section: "Pulmonary Circulation: Ventilation and Perfusion",
+                maskedLO: "LO1: Describe pressures within the pulmonary blood vessels...",
+                fullLO: "LO1: Describe pressures within the pulmonary blood vessels and explain how they differ from systemic pressures",
+                question: "Compared to systemic arteries, pulmonary arteries of similar size are characterized by which of the following structural differences?",
+                options: {
+                    A: "A thicker tunica media",
+                    B: "A thicker wall",
+                    C: "Higher resistance to flow",
+                    D: "Less smooth muscle and lower wall thickness",
+                    E: "No endothelial lining"
+                },
+                correctAnswer: "D",
+                rationale: "Because pulmonary blood pressure is low (~25/8 mmHg), the pulmonary arteries have lower wall thickness compared to systemic arteries.",
+                source: "Pulmonary Circulation PDF, Slide 6: \"Lower pressure results in lower wall thickness for pulmonary arteries.\""
+            },
+            {
+                section: "Pulmonary Circulation: Ventilation and Perfusion",
+                maskedLO: "LO2: Explain the pressures surrounding pulmonary vessels and how lung volume influences... vessel caliber.",
+                fullLO: "LO2: Explain the pressures surrounding pulmonary vessels and how lung volume influences extra-alveolar and alveolar vessel caliber",
+                question: "During a deep inhalation to Total Lung Capacity (TLC), which of the following changes occurs in the pulmonary vasculature?",
+                options: {
+                    A: "Alveolar vessels distend",
+                    B: "Alveolar vessels are compressed",
+                    C: "Extra-alveolar vessels are compressed",
+                    D: "Pulmonary Vascular Resistance (PVR) is at its minimum",
+                    E: "Radial traction on extra-alveolar vessels decreases"
+                },
+                correctAnswer: "B",
+                rationale: "As lung volume increases, expanding alveoli compress the alveolar vessels between them. However, radial traction pulls open the extra-alveolar vessels.",
+                source: "Pulmonary Circulation PDF, Slide 20: \"Expanding alveoli 'smash' alveolar vessels at high lung volumes. Radial traction pulls open the extra-alveolar vessels at high lung volumes.\""
+            },
+            {
+                section: "Pulmonary Circulation: Ventilation and Perfusion",
+                maskedLO: "LO2: Explain the pressures surrounding pulmonary vessels and how lung volume influences... vessel caliber.",
+                fullLO: "LO2: Explain the pressures surrounding pulmonary vessels and how lung volume influences extra-alveolar and alveolar vessel caliber",
+                question: "Pulmonary capillaries are liable to collapse or distend depending on the pressure around them. Which pressure constitutes the \"surrounding pressure\" for alveolar vessels?",
+                options: {
+                    A: "Alveolar pressure",
+                    B: "Intrapleural pressure",
+                    C: "Left atrial pressure",
+                    D: "Pulmonary artery pressure",
+                    E: "Systemic venous pressure"
+                },
+                correctAnswer: "A",
+                rationale: "Alveolar vessels (capillaries) are virtually surrounded by gas. Their caliber is determined by the relationship between alveolar pressure and the pressure within them.",
+                source: "Pulmonary Circulation PDF, Slide 13: \"Alveolar vessel -> exposed to alveolar pressure... Their caliber is determined by the relationship between alveolar pressure and pressure within them.\""
+            },
+            {
+                section: "Pulmonary Circulation: Ventilation and Perfusion",
+                maskedLO: "LO3: Define pulmonary vascular resistance (PVR) and describe the factors that determine it.",
+                fullLO: "LO3: Define pulmonary vascular resistance (PVR) and describe the factors that determine it",
+                question: "The pulmonary circulation has a unique ability to decrease resistance as vascular pressures rise. Which two mechanisms are primarily responsible for this decrease in Pulmonary Vascular Resistance (PVR)?",
+                options: {
+                    A: "Constriction and dilation",
+                    B: "Filtration and absorption",
+                    C: "Hypertrophy and hyperplasia",
+                    D: "Recruitment and distension",
+                    E: "Shunting and dead space"
+                },
+                correctAnswer: "D",
+                rationale: "When pressure in the pulmonary arteries increases, PVR decreases due to the recruitment of previously closed capillaries and the distension (widening) of already open capillaries.",
+                source: "Pulmonary Circulation PDF, Slide 16: \"Recruitment (opening of previously closed vessels) and distension (increase in caliber of vessels). These are the two mechanisms for the decrease in pulmonary vascular resistance that occurs as vascular pressures are raised.\""
+            },
+            {
+                section: "Pulmonary Circulation: Ventilation and Perfusion",
+                maskedLO: "LO3: Define pulmonary vascular resistance (PVR) and describe the factors that determine it.",
+                fullLO: "LO3: Define pulmonary vascular resistance (PVR) and describe the factors that determine it",
+                question: "At which lung volume is Pulmonary Vascular Resistance (PVR) the lowest?",
+                options: {
+                    A: "Functional Residual Capacity (FRC)",
+                    B: "Residual Volume (RV)",
+                    C: "Total Lung Capacity (TLC)",
+                    D: "Vital Capacity (VC)",
+                    E: "Zero lung volume"
+                },
+                correctAnswer: "A",
+                rationale: "PVR is lowest at FRC. At low volumes (RV), extra-alveolar vessels are compressed. At high volumes (TLC), alveolar vessels are compressed. The \"bottom of the U-shaped curve\" for resistance is near FRC.",
+                source: "Pulmonary Circulation PDF, Slide 20: \"Graph showing PVR is lowest at 'Functional Residual Capacity (FRC)'\""
+            },
+            {
+                section: "Pulmonary Circulation: Ventilation and Perfusion",
+                maskedLO: "LO4: Explain methods for measuring pulmonary blood flow.",
+                fullLO: "LO4: Explain methods for measuring pulmonary blood flow",
+                question: "To measure pulmonary blood flow using the Fick Principle, one must calculate oxygen consumption (VO2) and the difference between arterial and mixed venous oxygen content. Where is the appropriate site to sample mixed venous blood?",
+                options: {
+                    A: "Inferior Vena Cava",
+                    B: "Left Atrium",
+                    C: "Pulmonary Artery",
+                    D: "Pulmonary Vein",
+                    E: "Superior Vena Cava"
+                },
+                correctAnswer: "C",
+                rationale: "To obtain true mixed venous blood, the sample must be taken from the pulmonary artery (typically via a Swan-Ganz catheter), as this is where blood from the SVC, IVC, and coronary sinus has thoroughly mixed.",
+                source: "Pulmonary Circulation PDF, Slide 21: \"To obtain mixed venous blood, you need a sample from the pulmonary artery, which requires a catheter (Swan–Ganz).\""
+            },
+            {
+                section: "Pulmonary Circulation: Ventilation and Perfusion",
+                maskedLO: "LO4: Explain methods for measuring pulmonary blood flow.",
+                fullLO: "LO4: Explain methods for measuring pulmonary blood flow",
+                question: "According to the Fick Principle, pulmonary blood flow (Q) can be calculated using which of the following formulas?",
+                options: {
+                    A: "Q = VO<sub>2</sub> / (CaO<sub>2</sub> - CvO<sub>2</sub>)",
+                    B: "Q = (CaO<sub>2</sub> - CvO<sub>2</sub>) / VO<sub>2</sub>",
+                    C: "Q = VO<sub>2</sub> * (CaO<sub>2</sub> - CvO<sub>2</sub>)",
+                    D: "Q = (P<sub>pulm</sub> - P<sub>left_atrium</sub>) / Resistance",
+                    E: "Q = Stroke Volume * Heart Rate"
+                },
+                correctAnswer: "A",
+                rationale: "The volume of O<sub>2</sub> consumption divided by the arteriovenous oxygen difference equals the amount of blood flow.",
+                source: "Pulmonary Circulation PDF, Slide 21: \"VO<sub>2</sub> = Q * (CaO<sub>2</sub> - CvO<sub>2</sub>) ... Q = VO<sub>2</sub> / (CaO<sub>2</sub> - CvO<sub>2</sub>)\""
+            },
+            {
+                section: "Pulmonary Circulation: Ventilation and Perfusion",
+                maskedLO: "LO5: Describe the distribution of pulmonary blood flow...",
+                fullLO: "LO5: Describe the distribution of pulmonary blood flow and the gravitational and mechanical factors that shape it",
+                question: "In an upright human lung, blood flow is unevenly distributed due to gravity. Which of the following statements correctly describes this distribution?",
+                options: {
+                    A: "Blood flow is highest at the apex and lowest at the base.",
+                    B: "Blood flow is highest at the base and lowest at the apex.",
+                    C: "Blood flow is uniform throughout the lung.",
+                    D: "Blood flow is highest in the middle zone and low at both the apex and base.",
+                    E: "Blood flow is determined solely by hypoxic vasoconstriction, not gravity."
+                },
+                correctAnswer: "B",
+                rationale: "Gravity causes hydrostatic pressure differences. In the upright lung, blood flow decreases almost linearly from bottom (base) to top (apex).",
+                source: "Pulmonary Circulation PDF, Slide 22: \"In the upright human lung blood flow decreases almost linearly from bottom to top, reaching very low levels at the apex.\""
+            },
+            {
+                section: "Pulmonary Circulation: Ventilation and Perfusion",
+                maskedLO: "LO5: Describe the distribution of pulmonary blood flow...",
+                fullLO: "LO5: Describe the distribution of pulmonary blood flow and the gravitational and mechanical factors that shape it",
+                question: "In West Zone 2 of the lung, blood flow is determined by the difference between which two pressures?",
+                options: {
+                    A: "Alveolar pressure and Venous pressure (P<sub>A</sub> - P<sub>v</sub>)",
+                    B: "Arterial pressure and Alveolar pressure (P<sub>a</sub> - P<sub>A</sub>)",
+                    C: "Arterial pressure and Venous pressure (P<sub>a</sub> - P<sub>v</sub>)",
+                    D: "Venous pressure and Interstitial pressure (P<sub>v</sub> - P<sub>i</sub>)",
+                    E: "Venous pressure and Pleural pressure (P<sub>v</sub> - P<sub>pl</sub>)"
+                },
+                correctAnswer: "B",
+                rationale: "In Zone 2, arterial pressure > alveolar pressure > venous pressure (P<sub>a</sub> > P<sub>A</sub> > P<sub>v</sub>). Because the alveolar pressure pinches the capillaries at the downstream end, flow is driven by the gradient between arterial and alveolar pressure.",
+                source: "Pulmonary Circulation PDF, Slide 28: \"Zone 2... Blood flow is determined by the difference between arterial minus alveolar pressure, not the expected arterial minus venous pressure.\""
+            },
+            {
+                section: "Pulmonary Circulation: Ventilation and Perfusion",
+                maskedLO: "LO6: Explain the active control of the pulmonary circulation...",
+                fullLO: "LO6: Explain the active control of the pulmonary circulation, including hypoxic pulmonary vasoconstriction",
+                question: "A mountaineer climbs to a high altitude where the partial pressure of oxygen is low. This generalized hypoxia leads to an increase in pulmonary artery pressure. What is the physiological mechanism responsible for this response?",
+                options: {
+                    A: "Decreased sympathetic outflow",
+                    B: "Hypoxic pulmonary vasoconstriction (HPV)",
+                    C: "Increased production of Nitric Oxide",
+                    D: "Recruitment of all pulmonary capillaries",
+                    E: "Systemic vasodilation"
+                },
+                correctAnswer: "B",
+                rationale: "Unlike systemic vessels which dilate in hypoxia, pulmonary vessels constrict in response to alveolar hypoxia. Generalized hypoxia (like at altitude) causes generalized vasoconstriction and increased pulmonary pressure.",
+                source: "Pulmonary Circulation PDF, Slide 37: \"At high altitude, generalized HPV occurs -> rise in pulmonary arterial pressure.\""
+            },
+            {
+                section: "Pulmonary Circulation: Ventilation and Perfusion",
+                maskedLO: "LO6: Explain the active control of the pulmonary circulation...",
+                fullLO: "LO6: Explain the active control of the pulmonary circulation, including hypoxic pulmonary vasoconstriction",
+                question: "Which of the following substances acts as a vasodilator in the pulmonary circulation?",
+                options: {
+                    A: "Angiotensin II",
+                    B: "Endothelin",
+                    C: "Nitric Oxide (NO)",
+                    D: "Norepinephrine",
+                    E: "Thromboxane"
+                },
+                correctAnswer: "C",
+                rationale: "Nitric oxide is a relaxing factor (vasodilator). Inhibiting it augments vasoconstriction.",
+                source: "Pulmonary Circulation PDF, Slide 34: \"Decrease nitric oxide (NO). NO is a relaxing factor... inhaled NO blunts HPV.\""
+            },
+            {
+                section: "Pulmonary Circulation: Ventilation and Perfusion",
+                maskedLO: "LO7: Describe water balance in the lungs...",
+                fullLO: "LO7: Describe water balance in the lungs, including Starling forces and mechanisms preventing pulmonary edema",
+                question: "Which of the following Starling forces is the primary factor promoting the movement of fluid out of the pulmonary capillaries and into the interstitium?",
+                options: {
+                    A: "Capillary hydrostatic pressure (P<sub>c</sub>)",
+                    B: "Interstitial hydrostatic pressure (P<sub>i</sub>)",
+                    C: "Interstitial oncotic pressure (&pi;<sub>i</sub>)",
+                    D: "Plasma oncotic pressure (&pi;<sub>c</sub>)",
+                    E: "Reflection coefficient (&sigma;)"
+                },
+                correctAnswer: "A",
+                rationale: "The capillary hydrostatic pressure is the main outward force pushing fluid from the vessel into the interstitium.",
+                source: "Pulmonary Circulation PDF, Slide 67: \"Forces -> cause movement of fluid outward... Capillary pressure = 7 mmHg\""
+            },
+            {
+                section: "Pulmonary Circulation: Ventilation and Perfusion",
+                maskedLO: "LO7: Describe water balance in the lungs...",
+                fullLO: "LO7: Describe water balance in the lungs, including Starling forces and mechanisms preventing pulmonary edema",
+                question: "Pulmonary edema typically does not occur until pulmonary capillary pressure rises significantly. What anatomical feature primarily protects the alveoli from filling with fluid when a small amount of fluid is filtered into the interstitium?",
+                options: {
+                    A: "High alveolar surface tension",
+                    B: "Lymphatic drainage",
+                    C: "The alveolar epithelial tight junctions",
+                    D: "The high compliance of the lung",
+                    E: "The low protein content of the interstitium"
+                },
+                correctAnswer: "B",
+                rationale: "Lymphatic vessels remove plasma protein and fluid leaking from the lung capillaries, helping to prevent pulmonary edema.",
+                source: "Pulmonary Circulation PDF, Slide 65: \"plasma protein leaking from the lung capillaries is also removed from the lung tissue, thereby helping to prevent pulmonary edema.\""
+            },
+            {
+                section: "Pulmonary Circulation: Ventilation and Perfusion",
+                maskedLO: "LO8: Identify the metabolic and filtering functions of the pulmonary circulation.",
+                fullLO: "LO8: Identify the metabolic and filtering functions of the pulmonary circulation",
+                question: "The pulmonary endothelium is responsible for the biological activation of which of the following vasoactive substances?",
+                options: {
+                    A: "Angiotensin I",
+                    B: "Bradykinin",
+                    C: "Norepinephrine",
+                    D: "Prostaglandin E1",
+                    E: "Serotonin"
+                },
+                correctAnswer: "A",
+                rationale: "Angiotensin I is converted to Angiotensin II (activated) by ACE located on the surface of pulmonary endothelial cells. Most other substances listed are inactivated or unaffected.",
+                source: "Pulmonary Circulation PDF, Slide 43: \"Angiotensin I: Approximately 70% converted to angiotensin II... BIOLOGICAL ACTIVATION\""
+            },
+            {
+                section: "Pulmonary Circulation: Ventilation and Perfusion",
+                maskedLO: "LO8: Identify the metabolic and filtering functions of the pulmonary circulation.",
+                fullLO: "LO8: Identify the metabolic and filtering functions of the pulmonary circulation",
+                question: "A patient undergoes surgery and develops a small fibrin clot in the deep veins of the leg. This clot travels to the lung. The pulmonary circulation's ability to handle this clot best illustrates which function?",
+                options: {
+                    A: "Biological activation",
+                    B: "Blood filter",
+                    C: "Blood reservoir",
+                    D: "Gas exchange",
+                    E: "Immune defense"
+                },
+                correctAnswer: "B",
+                rationale: "The pulmonary circulation acts as a filter to protect the systemic circulation from materials like small fibrin clots, fat cells, and gas bubbles.",
+                source: "Pulmonary Circulation PDF, Slide 71: \"The pulmonary circulation -> filter -> protect the systemic circulation from materials... small fibrin or blood clots\""
+            },
+
+            // --- Section 3: Development of the Body Cavities and Respiratory System ---
+            {
+                section: "Development of the Body Cavities and Respiratory System",
+                maskedLO: "LO1: Describe the development of the pericardial cavity, pleural cavities, and peritoneal cavity.",
+                fullLO: "LO1: Describe the development of the pericardial cavity, pleural cavities, and peritoneal cavity",
+                question: "During the 4th week of development, the intraembryonic coelom gives rise to three major cavities. Which of the following pairs of canals originally connects the future pericardial and peritoneal cavities?",
+                options: {
+                    A: "Cervical canals",
+                    B: "Neurenteric canals",
+                    C: "Pericardioperitoneal canals",
+                    D: "Pleuropericardial canals",
+                    E: "Vitelline ducts"
+                },
+                correctAnswer: "C",
+                rationale: "The intraembryonic coelom divides into the pericardial cavity, pleural cavities, and peritoneal cavity. The pericardioperitoneal canals are paired canals that originally connect the pericardial and peritoneal cavities.",
+                source: "Development of the Body Cavities and Respiratory System PDF, Page 3: \"Pericardioperitoneal canals – paired canals that originally connect the pericardial & peritoneal cavities\""
+            },
+            {
+                section: "Development of the Body Cavities and Respiratory System",
+                maskedLO: "LO1: Describe the development of the pericardial cavity, pleural cavities, and peritoneal cavity.",
+                fullLO: "LO1: Describe the development of the pericardial cavity, pleural cavities, and peritoneal cavity",
+                question: "The separation of the pericardial and pleural cavities is achieved by the formation and fusion of which structures?",
+                options: {
+                    A: "Dorsal mesentery",
+                    B: "Pleuropericardial folds",
+                    C: "Pleuroperitoneal membranes",
+                    D: "Septum transversum",
+                    E: "Tracheoesophageal ridges"
+                },
+                correctAnswer: "B",
+                rationale: "Pleuropericardial folds arise from the lateral body wall, grow medially, and fuse to form the fibrous pericardium, separating the pleural and pericardial cavities.",
+                source: "Development of the Body Cavities and Respiratory System PDF, Page 3 & Slide 11: \"Pleuropericardial folds... grow medially towards one another and fuse... Separates the pleural and pericardial cavities\""
+            },
+            {
+                section: "Development of the Body Cavities and Respiratory System",
+                maskedLO: "LO2: Describe the formation of the diaphragm.",
+                fullLO: "LO2: Describe the formation of the diaphragm",
+                question: "Which of the following embryonic structures forms the central tendon of the diaphragm?",
+                options: {
+                    A: "Dorsal mesentery of the esophagus",
+                    B: "Muscular ingrowth from the lateral body wall",
+                    C: "Pleuropericardial folds",
+                    D: "Pleuroperitoneal membranes",
+                    E: "Septum transversum"
+                },
+                correctAnswer: "E",
+                rationale: "The septum transversum is a thick mass of mesoderm that forms the central tendon and the anterior aspect of the diaphragm.",
+                source: "Development of the Body Cavities and Respiratory System PDF, Page 3: \"Septum Transversum... Forms the central tendon and anterior aspect of diaphragm\""
+            },
+            {
+                section: "Development of the Body Cavities and Respiratory System",
+                maskedLO: "LO2: Describe the formation of the diaphragm.",
+                fullLO: "LO2: Describe the formation of the diaphragm",
+                question: "The crura of the diaphragm are derived from which of the following embryological structures?",
+                options: {
+                    A: "Dorsal mesentery of the esophagus",
+                    B: "Lateral body wall mesoderm",
+                    C: "Pleuroperitoneal membranes",
+                    D: "Septum transversum",
+                    E: "Somatic mesoderm"
+                },
+                correctAnswer: "A",
+                rationale: "The dorsal mesentery of the esophagus forms the median portion of the diaphragm, specifically the crura.",
+                source: "Development of the Body Cavities and Respiratory System PDF, Page 4: \"Dorsal Mesentery of the Esophagus... Forms the crura of the diaphragm\""
+            },
+            {
+                section: "Development of the Body Cavities and Respiratory System",
+                maskedLO: "LO3: Discuss the embryological basis and clinical presentation of congenital diaphragmatic hernias.",
+                fullLO: "LO3: Discuss the embryological basis and clinical presentation of congenital diaphragmatic hernias",
+                question: "A newborn presents with respiratory distress and a scaphoid abdomen. A chest X-ray reveals bowel loops in the left hemithorax. This condition, known as a Bochdalek hernia, is caused by a defect in which of the following?",
+                options: {
+                    A: "Dorsal mesentery",
+                    B: "Esophageal hiatus",
+                    C: "Muscular ingrowth from the body wall",
+                    D: "Pleuroperitoneal membranes",
+                    E: "Septum transversum"
+                },
+                correctAnswer: "D",
+                rationale: "Posterolateral defects (Bochdalek hernia) are the most common CDH and are caused by abnormal formation or fusion of the pleuroperitoneal membranes.",
+                source: "Development of the Body Cavities and Respiratory System PDF, Page 4: \"Posterolateral defects (known specifically as a Bochdalek hernia)... are caused by abnormal formation &/or fusion of the pleuroperitoneal membranes\""
+            },
+            {
+                section: "Development of the Body Cavities and Respiratory System",
+                maskedLO: "LO3: Discuss the embryological basis and clinical presentation of congenital diaphragmatic hernias.",
+                fullLO: "LO3: Discuss the embryological basis and clinical presentation of congenital diaphragmatic hernias",
+                question: "Congenital eventration of the diaphragm typically presents with a ballooning of abdominal viscera into the thoracic cavity. This defect is primarily due to the failure of:",
+                options: {
+                    A: "Closure of the pericardioperitoneal canals",
+                    B: "Fusion of the septum transversum with the dorsal mesentery",
+                    C: "Myoblasts to extend into the pleuroperitoneal membrane",
+                    D: "Neural crest cell migration",
+                    E: "The tracheoesophageal septum to partition the foregut"
+                },
+                correctAnswer: "C",
+                rationale: "Eventration results when muscles of the diaphragm are defective, mainly due to the failure of myoblasts to extend into the pleuroperitoneal membrane.",
+                source: "Development of the Body Cavities and Respiratory System PDF, Page 4: \"Congenital eventration of the diaphragm... results mainly from failure of myoblasts to extend into the pleuroperitoneal membrane\""
+            },
+            {
+                section: "Development of the Body Cavities and Respiratory System",
+                maskedLO: "LO4: Describe the formation of the lower respiratory tract.",
+                fullLO: "LO4: Describe the formation of the lower respiratory tract",
+                question: "The epithelial lining and glands of the trachea, bronchi, and alveoli are derived from which embryonic tissue layer?",
+                options: {
+                    A: "Ectoderm",
+                    B: "Endoderm",
+                    C: "Neural Crest",
+                    D: "Somatic mesoderm",
+                    E: "Splanchnic mesoderm"
+                },
+                correctAnswer: "B",
+                rationale: "The respiratory diverticulum is an outgrowth of the foregut. The endoderm lining this diverticulum gives rise to the epithelium and glands of the respiratory tract.",
+                source: "Development of the Body Cavities and Respiratory System PDF, Page 5: \"Endoderm lining the respiratory diverticulum gives rise to the epithelium and glands of the larynx, trachea, bronchi and alveoli.\""
+            },
+            {
+                section: "Development of the Body Cavities and Respiratory System",
+                maskedLO: "LO4: Describe the formation of the lower respiratory tract.",
+                fullLO: "LO4: Describe the formation of the lower respiratory tract",
+                question: "Congenital tracheomalacia involves floppy tracheal walls that collapse during respiration. This condition results from improper development of the tracheal cartilage, which is derived from:",
+                options: {
+                    A: "Endoderm",
+                    B: "Neural crest cells",
+                    C: "Paraxial mesoderm",
+                    D: "Somatic mesoderm",
+                    E: "Splanchnic mesoderm"
+                },
+                correctAnswer: "E",
+                rationale: "The connective tissue, cartilage, and smooth muscle of the trachea are derived from the splanchnic mesoderm surrounding the foregut. Tracheomalacia is a defect in this cartilage development.",
+                source: "Development of the Body Cavities and Respiratory System PDF, Slide 32: \"Tracheal rings of cartilage (splanchnic mesoderm) do not develop properly... Congenital Tracheomalacia\""
+            },
+            {
+                section: "Development of the Body Cavities and Respiratory System",
+                maskedLO: "LO5: Discuss the embryological basis... of tracheoesophageal fistulas & esophageal atresia.",
+                fullLO: "LO5: Discuss the embryological basis and clinical presentation of tracheoesophageal fistulas & esophageal atresia",
+                question: "A newborn infant immediately regurgitates milk upon feeding and has excessive drooling. The mother had polyhydramnios during pregnancy. Which of the following embryological errors is the most likely cause?",
+                options: {
+                    A: "Abnormal migration of neural crest cells",
+                    B: "Failure of the pleuroperitoneal membranes to fuse",
+                    C: "Incomplete fusion of the tracheoesophageal ridges",
+                    D: "Malformation of the septum transversum",
+                    E: "Persistent vitelline duct"
+                },
+                correctAnswer: "C",
+                rationale: "Tracheoesophageal fistula/esophageal atresia results from posterior deviation of the tracheoesophageal septum (formed by the fusion of tracheoesophageal ridges), leading to incomplete separation of the trachea and esophagus.",
+                source: "Development of the Body Cavities and Respiratory System PDF, Page 5: \"Tracheoesophageal fistula... results from incomplete separation of the foregut... caused by a posterior deviation of the tracheoesophageal septum.\""
+            },
+            {
+                section: "Development of the Body Cavities and Respiratory System",
+                maskedLO: "LO5: Discuss the embryological basis... of tracheoesophageal fistulas & esophageal atresia.",
+                fullLO: "LO5: Discuss the embryological basis and clinical presentation of tracheoesophageal fistulas & esophageal atresia",
+                question: "Polyhydramnios is often associated with esophageal atresia because:",
+                options: {
+                    A: "Fluid cannot pass to the stomach and intestines for absorption",
+                    B: "The fetus produces excessive urine",
+                    C: "The kidneys fail to develop",
+                    D: "The placenta produces too much fluid",
+                    E: "The trachea is blocked"
+                },
+                correctAnswer: "A",
+                rationale: "The fetus normally swallows amniotic fluid. If the esophagus ends blindly (atresia), fluid cannot pass to the stomach for absorption and transfer to the mother, leading to excess amniotic fluid (polyhydramnios).",
+                source: "Development of the Body Cavities and Respiratory System PDF, Page 5: \"Polyhydramnios... develops because fluid cannot pass to the stomach & intestines for absorption & subsequent transfer through the placenta to the mother.\""
+            },
+            {
+                section: "Development of the Body Cavities and Respiratory System",
+                maskedLO: "LO6: Describe the stages of lung maturation.",
+                fullLO: "LO6: Describe the stages of lung maturation",
+                question: "A fetus born at 25 weeks gestation is struggling to breathe. This is likely because the lungs are in the Canalicular Phase, where some terminal sacs have formed, but the production of a critical substance is just beginning. What is the substance and which cell type produces it?",
+                options: {
+                    A: "Amniotic fluid; Type I pneumocytes",
+                    B: "Mucus; Goblet cells",
+                    C: "Surfactant; Clara cells",
+                    D: "Surfactant; Type II pneumocytes",
+                    E: "VEGF; Endothelial cells"
+                },
+                correctAnswer: "D",
+                rationale: "During the Terminal Sac phase (starting around 26 weeks, though overlap exists), Type II pneumocytes begin to secrete surfactant. Before 26-28 weeks, surfactant levels are often insufficient.",
+                source: "Development of the Body Cavities and Respiratory System PDF, Page 7: \"Type II pneumocytes (alveolar cells) begin to secrete surfactant\""
+            },
+            {
+                section: "Development of the Body Cavities and Respiratory System",
+                maskedLO: "LO6: Describe the stages of lung maturation.",
+                fullLO: "LO6: Describe the stages of lung maturation",
+                question: "Respiratory Distress Syndrome (RDS) in premature infants is primarily caused by surfactant deficiency. Under normal conditions, what is the primary function of surfactant?",
+                options: {
+                    A: "To absorb amniotic fluid at birth",
+                    B: "To facilitate gas exchange across the blood-air barrier",
+                    C: "To increase the surface area of the alveoli",
+                    D: "To lower surface tension at the air-alveolar interface",
+                    E: "To prevent infection in the lungs"
+                },
+                correctAnswer: "D",
+                rationale: "Surfactant is a mixture of phospholipids and proteins that lowers surface tension, preventing alveolar collapse (atelectasis) and facilitating expansion. Deficiency leads to underinflated lungs and RDS.",
+                source: "Development of the Body Cavities and Respiratory System PDF, Page 7: \"secrete surfactant... that lowers surface tension at the air-alveolar interface and facilitates expansion\""
+            }
+        ];
+
+        // --- Core Logic ---
+        const quizRoot = document.getElementById('quiz-root');
+        const themeSelect = document.getElementById('theme-select');
+        const pinBtn = document.getElementById('pin-btn');
+        const mainHeader = document.getElementById('main-header');
+
+        function initQuiz() {
+            // Render Questions
+            let currentSection = "";
+            
+            quizData.forEach((item, index) => {
+                // Insert Section Header if needed
+                if (item.section !== currentSection) {
+                    currentSection = item.section;
+                    const sectionHeader = document.createElement('h2');
+                    sectionHeader.className = 'section-header';
+                    sectionHeader.textContent = currentSection;
+                    quizRoot.appendChild(sectionHeader);
+                }
+
+                // Create Card
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `q-card-${index}`;
+
+                // Learning Objective (Masked)
+                const loBox = document.createElement('div');
+                loBox.className = 'lo-box';
+                loBox.id = `lo-${index}`;
+                loBox.textContent = item.maskedLO;
+                card.appendChild(loBox);
+
+                // Question Text
+                const qText = document.createElement('div');
+                qText.className = 'question-text';
+                qText.textContent = `${index + 1}. ${item.question}`;
+                card.appendChild(qText);
+
+                // Options Container
+                const optionsGrid = document.createElement('div');
+                optionsGrid.className = 'options-grid';
+
+                for (const [key, value] of Object.entries(item.options)) {
+                    const label = document.createElement('label');
+                    label.className = 'option-label';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = `question-${index}`;
+                    input.value = key;
+
+                    const span = document.createElement('span');
+                    // Retain letters: A. Option Text
+                    span.innerHTML = `${key}. ${value}`;
+
+                    label.appendChild(input);
+                    label.appendChild(span);
+                    optionsGrid.appendChild(label);
+                }
+                card.appendChild(optionsGrid);
+
+                // Check Button
+                const btn = document.createElement('button');
+                btn.className = 'btn-check';
+                btn.textContent = 'Check Answer';
+                btn.onclick = () => checkAnswer(index);
+                card.appendChild(btn);
+
+                // Feedback Container
+                const feedback = document.createElement('div');
+                feedback.className = 'feedback';
+                feedback.id = `feedback-${index}`;
+                card.appendChild(feedback);
+
+                quizRoot.appendChild(card);
+            });
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('quizTheme') || 'dark';
+            changeTheme(savedTheme);
+            themeSelect.value = savedTheme;
+
+            // Load saved pin state
+            const savedPinState = localStorage.getItem('headerPinned');
+            // Default to true (pinned) if not set or if set to true
+            if (savedPinState === 'false') {
+                toggleHeader(false); 
+            } else {
+                toggleHeader(true);
+            }
+        }
+
+        function checkAnswer(index) {
+            const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+            const feedbackEl = document.getElementById(`feedback-${index}`);
+            const loEl = document.getElementById(`lo-${index}`);
+            const data = quizData[index];
+
+            if (!selected) {
+                alert("Please select an answer.");
+                return;
+            }
+
+            // Reveal LO
+            loEl.textContent = data.fullLO;
+
+            // Generate Feedback HTML
+            const isCorrect = selected.value === data.correctAnswer;
+            
+            let html = `<span class="feedback-header">${isCorrect ? "Correct!" : "Incorrect"}</span>`;
+            if (!isCorrect) {
+                html += `<div>The correct answer is <strong>${data.correctAnswer}</strong>.</div>`;
+            }
+            
+            html += `<div class="rationale"><strong>Rationale:</strong> ${data.rationale}</div>`;
+            html += `<div class="source"><strong>Source:</strong> ${data.source}</div>`;
+
+            feedbackEl.innerHTML = html;
+            feedbackEl.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+            feedbackEl.style.display = 'block';
+        }
+
+        function changeTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('quizTheme', themeName);
+        }
+
+        function toggleHeader(forceState) {
+            // Determine current state based on class presence
+            const isCurrentlyPinned = !mainHeader.classList.contains('unpinned');
+            
+            // If forceState is provided (boolean), use it. Otherwise toggle current state.
+            const newState = (typeof forceState === 'boolean') ? forceState : !isCurrentlyPinned;
+
+            if (newState) {
+                // Pin
+                mainHeader.classList.remove('unpinned');
+                pinBtn.classList.add('pin-active');
+                localStorage.setItem('headerPinned', 'true');
+            } else {
+                // Unpin
+                mainHeader.classList.add('unpinned');
+                pinBtn.classList.remove('pin-active');
+                localStorage.setItem('headerPinned', 'false');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initQuiz);
+
+    </script>
+</body>
+</html>
