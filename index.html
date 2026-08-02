@@ -1391,7 +1391,7 @@ function save(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); 
 const sections = [];
 quizData.forEach(q => { if (!sections.includes(q.section)) sections.push(q.section); });
 function shortLabel(name) {
-    const map = {};
+    const map = {"Pulmonary Circulation: Ventilation and Perfusion":"Ventilation & Perfusion","Development of the Body Cavities and Respiratory System":"Body Cavity & Respiratory Dev"};
     return map[name] || name;
 }
 window.__bbShortLabel = shortLabel;
